@@ -1,0 +1,56 @@
+.viewRecipe__container {
+  position: fixed;
+  top: 10;
+  background-color: rgba(240, 191, 191, 0.9);
+  z-index: 1000;
+  overflow: visible;
+  padding: 10px;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  border: 1px solid #c4c3c3;
+}
+.viewRecipe__container-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.viewRecipe__container-header h1 {
+    font-family: "Caveat Brush";
+    font-size: 48px;
+}
+.viewRecipe__container-description {
+  padding-left: 50px;
+}
+.viewRecipe__container-description h3{
+    font-family: "Caveat";
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.viewRecipe__container-body {
+  display: flex;
+  flex-direction: column;
+}
+.body__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 50px;
+}
+.body__header img {
+  width: 30px;
+}
+.body__header h4 {
+  font-family: "Caveat";
+  font-size: 28px;
+  padding-left: 10px;
+}
+.ingredients-h3{
+    font-family: "Caveat";
+    font-size: 26px;
+    font-weight: 400;
+    margin-left: 50px;
+}

@@ -13,5 +13,6 @@ export type FlexDirection = "row" | "row-reverse";
 
 export interface ModalProps {
   handleCloseClick: () => void;
+  recipeData?: Recipe;
 }
 
