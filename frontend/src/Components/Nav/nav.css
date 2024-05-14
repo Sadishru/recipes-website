@@ -1,0 +1,43 @@
+.nav__container {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 10px;
+}
+.nav__container h3 {
+    font-family: "Caveat Brush";
+    color: var(--color-gold);
+    font-size: 48px;
+    font-weight: 500;
+    margin-left: 50px;
+}
+.nav__container-cta form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding-left: 20vw;
+}
+.nav__container-cta form input {
+    width: 400px;
+    height: 25px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    padding: 1px 20px;
+
+    font-family: "Caveat";
+    font-size: 22px;
+}
+.nav__container-cta form button {
+    background:none;
+    border: none;
+    outline: none;
+    scale: 0.9;
+    margin-left: 15px;
+}
+.nav__container-cta form button:hover{
+    cursor: pointer;
+}
