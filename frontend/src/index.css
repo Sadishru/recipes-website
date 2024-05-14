@@ -1,6 +1,6 @@
 :root {
   font-family: "Poppins";
-  --color-gold: #E49E33;
+  --color-gold: #e49e33;
   --color-red: #c23e45;
 }
 :root,
@@ -23,4 +23,20 @@ h5 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.primary-btn {
+  background-color: #2b2b2b;
+  color: white;
+  border: 1px solid transparent; 
+  outline: none;
+  padding: 5px 25px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-family: "Poppins";
+}
+.primary-btn:hover{
+  cursor: pointer;
+  background-color: black;
+  border: 1px solid white;
 }

@@ -1,0 +1,30 @@
+.recipe__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.recipe__container-cover {
+    margin-top: 30px;
+    padding-left: 30px;
+}
+.recipe__container-cover img {
+    width: 400px;
+}
+.recipe__container-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+}
+.recipe__container-info h1 {
+    font-family: "Caveat Brush";
+    font-size: 62px;
+    font-weight: 500;
+}
+.recipe__container-info p {
+    font-family: "Caveat";
+    font-size: 38px;
+    font-weight: 400;
+    width: 800px;
+    margin-bottom: 20px;
+}

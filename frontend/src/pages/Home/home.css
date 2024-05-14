@@ -1,4 +1,35 @@
-.home__container{
-    background-color: black;
-    color: white;
+.home__container {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+}
+.home__container-header {
+  margin-top: 20px;
+}
+.home__container-header button {
+  margin-left: 30px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+.home__container-footer {
+    text-align: center;
+    font-size: 18px;
+    color: #2B2B2B;
+    font-family: "Caveat";
+    padding-bottom: 10px;
 }
