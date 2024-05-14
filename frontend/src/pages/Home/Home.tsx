@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import "./home.css";
 import axios from "axios";
 import Recipe from "../../Components/Recipe/Recipe";
@@ -7,12 +7,23 @@ import { Recipe as RecipeType } from "../../lib/types";
 import punch from "../../assets/images/punch.png";
 import cocktail from "../../assets/images/cocktail.png";
 import cocktail2 from "../../assets/images/cocktail2.png";
+import NewRecipe from "../../Components/NewRecipe/NewRecipe";
 
 const coversArray = [cocktail, cocktail2, punch];
 
 const Home = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
+  const overlayRef = useRef <HTMLDivElement>(null);
+  //state
   const [recipeData, setRecipeData] = useState<RecipeType[] | null>(null);
+  const [newVisibility, setNewVisibility] = useState<boolean>(false);
+
+  const handleNewVisibility = () => {
+    setNewVisibility(true);
+  }
+  const handleNewCloseClick = () => {
+    setNewVisibility(false);
+  }
 
   const getRecipes = async () => {
     try {
@@ -28,10 +39,25 @@ const Home = () => {
   useEffect(() => {
     getRecipes();
   }, []);
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (overlayRef.current && !overlayRef.current.contains(e.target as Node)) {
+        setNewVisibility(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
   return (
     <div className="home__container">
       <div className="home__container-header">
-        <button className="primary-btn">New Recipe</button>
+        <button className="primary-btn" onClick={handleNewVisibility}>New Recipe</button>
+      </div>
+      <div className="home__container-overlay" ref={overlayRef}>
+        {newVisibility && <NewRecipe handleCloseClick={handleNewCloseClick}/>}
       </div>
       <div className="home__container-recipes">
         {recipeData &&

@@ -9,4 +9,9 @@ export interface Recipe {
   ingredients: Ingredient[];
 }
 
-export type FlexDirection = 'row' | 'row-reverse'
+export type FlexDirection = "row" | "row-reverse";
+
+export interface ModalProps {
+  handleCloseClick: () => void;
+}
+

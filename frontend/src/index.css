@@ -28,14 +28,81 @@ h5 {
 .primary-btn {
   background-color: #2b2b2b;
   color: white;
-  border: 1px solid transparent; 
+  border: 1px solid transparent;
   outline: none;
   padding: 5px 25px;
   border-radius: 30px;
   font-size: 13px;
   font-family: "Poppins";
 }
-.primary-btn:hover{
+.primary-btn:hover {
+  cursor: pointer;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.input-field {
+  outline: none;
+  border: none;
+  background-color: #2b2b2b;
+  padding: 5px 30px;
+  border-radius: 30px;
+  width: 500px;
+
+  font-family: "Caveat";
+  font-size: 32px;
+  color: var(--color-gold);
+}
+.input-field-secondary {
+  outline: none;
+  border: none;
+  background-color: #2b2b2b;
+  padding: 3px 20px;
+  border-radius: 30px;
+  width: 200px;
+
+  font-family: "Caveat";
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  color: #e2e2e2;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  outline: none;
+}
+.close-btn:hover {
+  cursor: pointer;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  outline: none;
+}
+.remove-btn img {
+    width: 25px;
+    transform: translateY(5px);
+}
+.remove-btn:hover {
+  cursor: pointer;
+}
+.add-btn {
+  background-color: #2b2b2b;
+  color: white;
+  border: 1px solid transparent;
+  outline: none;
+  padding: 5px 25px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-family: "Poppins";
+  width: 250px;
+  margin-bottom: 10px;
+}
+.add-btn:hover {
   cursor: pointer;
   background-color: black;
   border: 1px solid white;
