@@ -19,17 +19,8 @@ async def fetch_one_recipe(title):
 #         recipes.append(Recipe(**document))
 #     return recipes
 async def fetch_all_recipes():
-    recipes = []
-    cursor = collection.find({})
-    async for document in cursor:
-        # Ensure that the 'ingredients' field is converted to a list of dictionaries
-        ingredients = document.get('ingredients', [])  # Retrieve the 'ingredients' field or default to an empty list
-        if not isinstance(ingredients, list):
-            raise ValueError("Ingredients field must be a list")
-
-        # Append the recipe with the corrected 'ingredients' field
-        recipes.append(Recipe(title=document['title'], description=document['description'], ingredients=ingredients))
-    return recipes
+    recipes = await collection.find().to_list(length=None)
+    return [Recipe(**recipy) for recipy in recipes]
 
 
 async def create_recipe(recipe):
@@ -45,17 +36,16 @@ async def create_recipe(recipe):
 async def update_recipe(title, recipe):
     ingredients = recipe['ingredients']
     # Validate ingredients format
-    print("================ ", type(ingredients))
     if not isinstance(ingredients, list):
         raise ValueError("Ingredients must be a list")
     for ingredient in ingredients:
         if not isinstance(ingredient, dict):
             raise ValueError("Each ingredient must be a dictionary")
-        if not all(key in ingredient for key in ("name", "C")):
+        if not all(key in ingredient for key in ("name", "value")):
             raise ValueError("Each ingredient dictionary must have 'name' and 'amount' keys")
 
     # Update the recipe in the database
-    await collection.update_one({"title": title}, {"$set": {"ingredients": ingredients}})
+    await collection.update_one({"title": title}, {"$set": {'title': recipe['title'], 'description': recipe['description'], 'ingredients': recipe['ingredients']}})
     
     # Return the updated recipe document
     document = await collection.find_one({"title": title})

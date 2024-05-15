@@ -1,74 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./viewRecipe.css";
-import { ModalProps, Ingredient } from "../../lib/types";
-import axios from "axios";
-import { toast, Toaster } from "react-hot-toast";
+import { ModalProps } from "../../lib/types";
 
 import close from "../../assets/icons/close.png";
 import ingredientsImg from "../../assets/icons/ingredients.png";
-import removeImg from "../../assets/icons/remove.png";
+import editImg from "../../assets/icons/edit.png";
+import EditRecipe from "../EditRecipe/EditRecipe";
 
 const ViewRecipe: React.FC<ModalProps> = ({ handleCloseClick, recipeData }) => {
   console.log("rec", recipeData);
-  const apiUrl = import.meta.env.VITE_API_URL;
-  //states
-  const [selectedName, setSelectedName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [ingredientsData, setIngredientsData] = useState<Ingredient[]>([
-    { name: "", value: "" },
-  ]);
 
-  const handleIngredientChange = (
-    index: number,
-    field: keyof Ingredient,
-    value: string
-  ) => {
-    const updatedIngredients = [...ingredientsData];
-    updatedIngredients[index][field] = value;
-    setIngredientsData(updatedIngredients);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const [editVisibility, setEditVisibility] = useState<boolean>(false);
+  const handleEditVisibility = () => {
+    setEditVisibility(true);
+  };
+  const handleEditCloseClick = () => {
+    setEditVisibility(false);
   };
 
-  const addIngredient = () => {
-    setIngredientsData([...ingredientsData, { name: "", value: "" }]);
-  };
-
-  const removeIngredient = (index: number) => {
-    const updatedIngredients = [...ingredientsData];
-    updatedIngredients.splice(index, 1);
-    setIngredientsData(updatedIngredients);
-  };
-
-  const submitRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const config = {
-      headers: {
-        "content-type": "application/json",
-      },
-    };
-    const data = {
-      title: selectedName,
-      description: description,
-      ingredients: ingredientsData,
-    };
-    try {
-      const response = await axios.post(`${apiUrl}/api/recipes`, data, config);
-      if (response.data) {
-        toast("Recipe Added Successfully!🌱");
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (
+        overlayRef.current &&
+        !overlayRef.current.contains(e.target as Node)
+      ) {
+        setEditVisibility(false);
       }
-    } catch (e: any) {
-      toast("Oops! Try Again Later🌱");
-      console.log(e.message);
-    }
-  };
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <div className="viewRecipe__container">
       <div className="viewRecipe__container-header">
         <h1>{recipeData?.title}</h1>
+        <button className="close-btn edit-btn-styles" onClick={handleEditVisibility}>
+          <img src={editImg} alt="Edit Recipe" title="Edit Recipe" />
+        </button>
         <button className="close-btn" onClick={handleCloseClick}>
-          <img src={close} alt="Close" />
+          <img src={close} alt="Close" title="Close" />
         </button>
       </div>
+      <div className="home__container-overlay" ref={overlayRef}>
+        {editVisibility && (<EditRecipe handleCloseClick={handleEditCloseClick} recipeData={recipeData} />)}
+      </div> 
       <div className="viewRecipe__container-description">
         <h3>{recipeData?.description}</h3>
       </div>
@@ -84,8 +64,6 @@ const ViewRecipe: React.FC<ModalProps> = ({ handleCloseClick, recipeData }) => {
             </h3>
           ))}
       </div>
-
-      <Toaster />
     </div>
   );
 };

@@ -48,7 +48,7 @@ async def post_recipe(recipe: Recipe):
         return response
     raise HTTPException(status_code=400, detail="Bad Request")
 
-@app.put("/api/recipes{title}", response_model=Recipe)
+@app.put("/api/recipes/{title}", response_model=Recipe)
 async def put_recipe(title:str, recipe:Recipe):
     response = await update_recipe(title,recipe.dict())
     if response:
