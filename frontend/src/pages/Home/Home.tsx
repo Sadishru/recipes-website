@@ -49,6 +49,7 @@ const Home = () => {
       console.log("recipes err", error);
     }
   };
+
   useEffect(() => {
     getRecipes();
   }, []);

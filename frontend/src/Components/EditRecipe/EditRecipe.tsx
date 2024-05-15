@@ -54,10 +54,10 @@ const EditRecipe: React.FC<ModalProps> = ({ handleCloseClick, recipeData }) => {
         const encodedTitle = encodeURIComponent(recipeData?.title||'');
       const response = await axios.put(`${apiUrl}/api/recipes/${encodedTitle}`, data, config);
       if (response.data) {
-        toast("Recipe Updated Successfully!🌱");
+        toast("Recipe Updated Successfully! 🥃");
       }
     } catch (e: any) {
-      toast("Oops! Try Again Later🌱");
+      toast("Oops! Try Again Later 🥃");
       console.log(e.message);
     }
   };

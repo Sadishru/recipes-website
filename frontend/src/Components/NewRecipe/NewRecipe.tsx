@@ -52,10 +52,10 @@ const NewRecipe: React.FC<ModalProps> = ({ handleCloseClick }) => {
     try {
       const response = await axios.post(`${apiUrl}/api/recipes`, data, config);
       if (response.data) {
-        toast("Recipe Added Successfully!🌱");
+        toast("Recipe Added Successfully! 🥃");
       }
     } catch (e: any) {
-      toast("Oops! Try Again Later🌱");
+      toast("Oops! Try Again Later 🥃");
       console.log(e.message);
     }
   };
